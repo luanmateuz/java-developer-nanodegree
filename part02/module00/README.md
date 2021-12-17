@@ -22,3 +22,43 @@ There are many users who use computer network and are located all over the world
 Suppose you are browsing the internet, when an http (get) request occurs, according to the OSI Model, it is basically this path that takes place between the browser and the internet.
 
 ![OSI Model Example](resources/osimodelexample.png) 
+
+## Transport Layer
+
+The Transport layer is the layer-4 of the OSI reference model. The transport layer is mainly responsible for the process-to-process delivery of the entire message. A process is basically an application program that is running on the host.
+
+The basic function of the Transport layer is to accept data from the layer above, split it up into smaller units, pass these data units to the Network layer, and ensure that all the pieces arrive correctly at the other end.
+
+### TCP vs UDP Protocol
+
+**TCP** is an abbreviation for Transmission Control Protocol.**TCP** is a connection-oriented protocol. This protocol mainly creates a virtual connection between two **TCP**s in order to send the data. This protocol also makes use of flow and error control mechanisms at the transport level.
+
+**TCP** is a transport layer protocol. Also, **TCP** is a program-to-program protocol same as **UDP**. The **TCP/IP** mainly stands for Transmission Control Protocol/ Internet Protocol. This protocol is specifically designed as a model that offers high reliability and end-to-end byte stream over unreliable internetwork.
+
+We can also say that the **TCP** adds connection-oriented and reliability features to the services of the IP.
+
+The **TCP** connection is simply established with the help of a three-way handshake. Thus basically it is a process of initiating and acknowledging a connection. Once the establishment of connection, the transfer of data begins, and once the process of transmission is finished, the connection is terminated just by closing the established virtual circuit.
+
+**UDP** is an abbreviation for User Datagram protocol.**UDP** is a connectionless and unreliable protocol. This protocol does not add up anything to the services of IP except the fact that this protocol provides process-to-process communication in spite of host-to-host communication.**UDP** protocol performs error checking in a very limited amount.
+
+The User datagram protocol makes use of the simple method of transmission. **UDP** does not make use of implied hand-shaking dialogues for ordering, reliability, or data integrity. This protocol mainly assumes that error checking and correction is not important or performed in the application. In order to avoid the overhead of such processing at the network interface level. **UDP** is also compatible with packet broadcasts and multicasting.
+
+### Difference between **TCP** and **UDP**
+
+ **TCP**  | **UDP**
+----------|---------
+TCP is a connection-oriented protocol. | UDP is a Connectionless protocol.
+This protocol rearranges the data packets in a specific order. | There is no concept of ordering as because all the packets are independent of each other.
+The header size of the TCP is 20 bytes. |	The header size of the UDP is 8 bytes.
+The transmission control protocol(TCP) is a reliable protocol because it ensures the delivery of each data packet.	| The User datagram protocol is unreliable because it does not guarantee the delivery of data packets.
+As TCP is a connection-oriented protocol which simply means that there is the need for the establishment of the connection before transmitting the data over the network. |	As UDP is a connectionless protocol thus there is no need for the establishment of the connection, and also there is no need to check whether the system is ready to receive the data or not.
+It makes the use of handshake protocols such as SYN, SYN-ACK, ACK. | There is no concept of handshaking.
+This protocol performs the error checking and it also offers the recovery from the errors. | There is no concept of error checking, but the UDP usually discards the erroneous packets.
+The acknowledgment segments are present.|No presence of acknowledgment segments.
+TCP offers slow speed.|UDP is faster than TCP
+The TCP messages usually make their way across the internet from one computer to another. | In this one program can send a lot of packets to the other computer.
+The flow control mechanism is present in TCP thus sender cannot send too many packets to the receiver simultaneously.| Absence of flow control mechanism.
+Extensive error checking is offered by TCP as it provides the flow control as well as the acknowledgment of the data.|A single error checking mechanism is provided by UDP and is used for checksums.
+Retransmission of data packets is possible when using the TCP in case of the lost data packets.| Retransmission is not possible when using the UDP.
+This protocol is heavy in weight as compared to UDP. |UDP is faster and more efficient than TCP.
+This protocol mainly reads the data in the form of streams of bytes and also the message is transmitted to the segment boundaries.|The UDP messages mainly contain the packets that were sent one by one. UDP also checks for integrity at the time of arrival.
