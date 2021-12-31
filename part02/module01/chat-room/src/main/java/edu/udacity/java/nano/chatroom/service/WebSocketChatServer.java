@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@ServerEndpoint("/chat")
+@ServerEndpoint("/chat/{username}")
 public class WebSocketChatServer {
 
     // All Chat Sessions.

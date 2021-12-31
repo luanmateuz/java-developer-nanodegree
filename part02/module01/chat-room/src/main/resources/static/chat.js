@@ -1,5 +1,5 @@
 function getWebSocket() {
-    var webSocket = new WebSocket('ws://localhost:8080/chat');
+    var webSocket = new WebSocket('ws://localhost:8080/chat/' + username.value);
 
     webSocket.onopen = function (event) {
         console.log('WebSocket open connection');
@@ -7,7 +7,8 @@ function getWebSocket() {
 
     webSocket.onmessage = function (event) {
         console.log('WebSocket Receives：%c' + event.data, 'color:green');
-
+        var allData = JSON.parse(event.data);
+        changeOnlineCount(allData.onlineCount);
     };
 
     webSocket.onclose = function (event) {
@@ -24,11 +25,11 @@ function getWebSocket() {
 var webSocket = getWebSocket();
 
 function sendMsgToServer() {
-    var usernameT = document.getElementById('username').value;
+    var username = document.getElementById('username').value;
     var message = document.getElementById('message').value;
 
     if (message.length > 0) {
-        webSocket.send(JSON.stringify({username: usernameT, msg: message}));
+        webSocket.send(JSON.stringify({username, message}));
         message = clearMsg();
     }
 }
@@ -36,6 +37,11 @@ function sendMsgToServer() {
 function clearMsg() {
     var message = document.getElementById('message');
     message.value = "";
+}
+
+function changeOnlineCount(num) {
+    var onlineCount = document.getElementById('onlineCount');
+    onlineCount.innerText = num;
 }
 
 document.onkeydown = function (event) {
