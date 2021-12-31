@@ -5,9 +5,63 @@
 
 <body>
 
-<h1>Chat Page!</h1>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <span class="navbar-brand">
+                <img src="/chat.png" alt="" width="24" height="24" class="d-inline-block align-text-top">
+                <span class="fs-5">ChatApp </span>
+                <span class="fs-6 fw-light">with WebSocket</span>
+            </span>
+            <a href="" class="text-decoration-none">
+                <i class="bi bi-box-arrow-right"></i> Exit
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h3 class="fs-3">Welcome, luanmateuz</h3>
+            <div class="ms-0 mt-4 m-4">
+                <input type="text" name="message" id="message" class="form-control mb-3">
+                <div class="d-flex justify-content-left" style="float: right;">
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="bi bi-x-square"></i> Clear
+                    </button>
+                    <button type="submit" class="btn btn-outline-primary ms-3">
+                        <i class="bi bi-send"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <span class="fs-5"><i class="bi bi-circle"></i> Content</span>
+            <span class="fs-5 ms-5"><i class="bi bi-people"></i> Online Users<span
+                    class="btn btn-primary m-1 ms-2">2</span></span>
+
+            <div class="row ms-1">
+                <div class="border border-primary rounded mt-3">
+                    <p class="fs-6 fw-light no-margin text-primary mt-1 mb-1">Josh</p>
+                    <p class="no-margin mb-1 text-break">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, tenetur! Commodi, explicabo. Consectetur adipisicing elit.</p>
+                </div>
+                <div class="border border-primary rounded mt-3">
+                    <p class="fs-6 fw-light no-margin text-primary mt-1 mb-1">Ellen</p>
+                    <p class="no-margin mb-1 text-break">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, quam. Perferendis, tenetur!</p>
+                </div>
+                <div class="border border-primary rounded mt-3">
+                    <p class="fs-6 fw-light no-margin text-primary mt-1 mb-1">Mario</p>
+                    <p class="no-margin mb-1 text-break">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, explicabo. Commodi, explicabo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 <footer th:replace="~{components :: footer}"></footer>
 
 </body>
+
 </html>
