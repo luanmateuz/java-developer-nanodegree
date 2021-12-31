@@ -8,7 +8,9 @@ function getWebSocket() {
     webSocket.onmessage = function (event) {
         console.log('WebSocket Receives：%c' + event.data, 'color:green');
         var allData = JSON.parse(event.data);
-        changeOnlineCount(allData.onlineCount);
+
+        chatMessages(allData);
+        changeOnlineCount(allData);
     };
 
     webSocket.onclose = function (event) {
@@ -36,12 +38,33 @@ function sendMsgToServer() {
 
 function clearMsg() {
     var message = document.getElementById('message');
+
     message.value = "";
 }
 
-function changeOnlineCount(num) {
+function changeOnlineCount(allData) {
+    var number = allData.onlineCount;
     var onlineCount = document.getElementById('onlineCount');
-    onlineCount.innerText = num;
+
+    onlineCount.innerText = number;
+}
+
+function chatMessages(allData) {
+    var { type, username, message } = allData;
+    var chatMessages = document.getElementById('chat-messages');
+
+    if (type === 'SPEAK') {
+        var div = document.createElement('div');
+        div.className = 'border border-primary rounded mt-3';
+
+        div.innerHTML = `
+            <p class="fs-6 fw-light no-margin text-primary mt-1 mb-1">${username}</p>
+            <p class="no-margin mb-1 text-break">${message}</p>
+        `;
+
+        chatMessages.appendChild(div);
+    }
+
 }
 
 document.onkeydown = function (event) {
