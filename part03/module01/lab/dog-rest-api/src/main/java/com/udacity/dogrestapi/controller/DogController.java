@@ -30,4 +30,11 @@ public class DogController {
 
         return new ResponseEntity<String>(dog, HttpStatus.OK);
     }
+
+    @GetMapping("/dogs/names")
+    public ResponseEntity<List<String>> getAllDogNames() {
+        List<String> names = dogService.retriveDogNames();
+
+        return new ResponseEntity<List<String>>(names, HttpStatus.OK);
+    }
 }

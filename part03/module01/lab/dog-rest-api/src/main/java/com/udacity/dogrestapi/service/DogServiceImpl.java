@@ -21,4 +21,9 @@ public class DogServiceImpl implements DogService {
     public String retriveDogBreedById(Long id) {
         return dogRepository.findBreedById(id);
     }
+
+    @Override
+    public List<String> retriveDogNames() {
+        return dogRepository.findAllNames();
+    }
 }
