@@ -12,11 +12,11 @@ import java.util.List;
 public interface DogRepository extends CrudRepository<Dog, Long> {
 
     String FIND_ALL_BREED = "SELECT dog.breed FROM dog";
-    String FIND_BY_ID_BREED = "SELECT dog.id, dog.breed FROM dog WHERE dog.id = :id";
+    String FIND_BREED_BY_ID = "SELECT dog.id, dog.breed FROM dog WHERE dog.id = :id";
 
     @Query(value = FIND_ALL_BREED, nativeQuery = true)
     List<String> findAllBreed();
 
-    @Query(value = FIND_BY_ID_BREED, nativeQuery = true)
-    String findByIdBreed(@Param("id") Long id);
+    @Query(value = FIND_BREED_BY_ID, nativeQuery = true)
+    String findBreedById(@Param("id") Long id);
 }
