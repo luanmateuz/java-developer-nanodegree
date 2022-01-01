@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController()
 public class DogController {
 
     @Autowired
@@ -32,10 +32,10 @@ public class DogController {
     }
 
     @GetMapping("/dogs/{id}/breed/")
-    public ResponseEntity<String> getByIdDogBreed(@PathVariable Long id) {
-        String dog = dogService.retriveDogBreedById(id);
+    public ResponseEntity<String> getDogBreedById(@PathVariable Long id) {
+        String breed = dogService.retriveDogBreedById(id);
 
-        return new ResponseEntity<String>(dog, HttpStatus.OK);
+        return new ResponseEntity<String>(breed, HttpStatus.OK);
     }
 
     @GetMapping("/dogs/names")
