@@ -17,6 +17,13 @@ public class DogController {
     @Autowired
     private DogService dogService;
 
+    @GetMapping("/dogs")
+    public ResponseEntity<List<Dog>> getAllDogs() {
+        List<Dog> dogs = dogService.retrieveDogs();
+
+        return new ResponseEntity<List<Dog>>(dogs, HttpStatus.OK);
+    }
+
     @GetMapping("/dogs/breed")
     public ResponseEntity<List<String>> getAllDogBreeds() {
         List<String> list = dogService.retrieveDogBreed();
@@ -24,7 +31,7 @@ public class DogController {
         return new ResponseEntity<List<String>>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/dogs/breed/{id}")
+    @GetMapping("/dogs/{id}/breed/")
     public ResponseEntity<String> getByIdDogBreed(@PathVariable Long id) {
         String dog = dogService.retriveDogBreedById(id);
 
