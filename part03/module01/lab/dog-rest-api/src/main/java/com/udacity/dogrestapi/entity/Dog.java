@@ -19,10 +19,9 @@ public class Dog {
     public Dog() {
     }
 
-    public Dog(String name, String breed, String origin) {
-        this.name = name;
+    public Dog(Long id, String breed) {
+        this.id = id;
         this.breed = breed;
-        this.origin = origin;
     }
 
     public Long getId() {
