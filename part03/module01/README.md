@@ -104,3 +104,100 @@ For use `data.sql` on run project, this file should be within the `resources` di
 ```properties
 spring.jpa.defer-datasource-initialization=true
 ```
+
+## GraphQL
+
+GraphQL is a query language for APIs or a syntax that describes how to ask for data and is generally used to load data from a server to a client. GraphQL offers maximum efficiency and flexibility because it allows the calling client to specify exactly what data it needs.
+
+To include GraphQL in Java (Spring) project, we need add this dependencies
+
+- **graphql-spring-boot-starter**
+- **graphql-java-tools**
+
+The GraphQL schema defines the data points offered via an API. The schema contains the data types and relationships between them and the set of operations available, things like queries for retrieving data and mutations for creating, updating, and deleting data.
+
+The schema from the **dog-graphql-api** is shown below.
+
+**Schema**
+> Contract between the GraphQL client and the GraphQL server
+```graphqls
+type Dog {
+    id: ID!
+    name: String!
+    breed: String!
+    origin: String!
+}
+
+type Query {
+    findDogBreeds: [String]!
+    findDogBreedById(id: ID!): String!
+    findAllDogNames: [String]!
+    findAllDogs: [Dog]!
+    findDogById(id:ID!): Dog!
+}
+
+type Mutation {
+    createDog(name: String!, breed: String!, origin: String!) : Dog!
+    deleteDogBreed(breed:String!) : Boolean
+    updateDogName(id: ID!, name: String!) : Dog!
+}
+```
+
+GraphQL offers operations on data like queries and mutations.
+
+**Queries** 
+> Similar to GET call in REST and used by the client to query the fields
+
+A query allows for the retrieving of data. Each query will have a specific object that it returns and based on the object returned, you can add or remove fields to match the exact data you need to fit your specific use case.
+
+**Mutations**
+> It is similar to POST/PUT call in REST and used by the client for any insert/update operation
+
+GraphQL has the ability to update the data stored on the server, by means of mutations. Mutations, such as, create, update, or delete will change the data, unlike a query.
+
+### **Graph _i_ QL**
+
+A tool called GraphiQL is a simple web app that is able to communicate with any GraphQL Server and execute queries and mutations against it. Postman is other application can execute queries and mutations.
+
+**Sample Queries/Mutations**
+
+```graphql
+query {
+  findAllDogs {
+    id
+    name
+    breed
+    origin
+  }
+}
+
+mutation {
+  createDog(name: "Bob", breed: "Sheet", origin: "American") {
+    id
+    name
+    breed
+    origin
+  }
+}
+```
+
+**GraphQL Properties**
+
+By default GraphQL have the settings bellow
+
+```properties
+graphql.servlet.mapping=/graphql
+graphql.servlet.enabled=true
+graphql.servlet.corsEnabled=true
+
+graphiql.enabled=true
+graphiql.endpoint=/graphql
+graphiql.mapping=graphiql
+```
+
+- **GraphQL Schema** accessible via http://localhost:8080/graphql/schema.json
+
+- **GraphiQL** 
+accessible via http://localhost:8080/graphiql
+
+Full implemention GraphQL and Spring in the project _dog-graphql-api_.
