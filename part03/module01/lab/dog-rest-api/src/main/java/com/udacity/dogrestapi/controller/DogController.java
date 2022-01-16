@@ -2,6 +2,8 @@ package com.udacity.dogrestapi.controller;
 
 import com.udacity.dogrestapi.entity.Dog;
 import com.udacity.dogrestapi.service.DogService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController()
+@RestController
+@ApiResponses(value = {
+        @ApiResponse(code = 400, message = "This is a bad request, please follow the API documentation for the proper request format."),
+        @ApiResponse(code = 401, message = "Due to security constraints, your access request cannot be authorized."),
+        @ApiResponse(code = 500, message = "The server is down. Please make sure that the Dog REST API is running.")
+})
 public class DogController {
 
     @Autowired
