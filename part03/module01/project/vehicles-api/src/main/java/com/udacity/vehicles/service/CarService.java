@@ -5,6 +5,7 @@ import com.udacity.vehicles.client.prices.PriceClient;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,7 +36,13 @@ public class CarService {
      * @return a list of all vehicles in the CarRepository
      */
     public List<Car> list() {
-        return carRepository.findAll();
+        return carRepository.findAll()
+                .stream()
+                .peek(car -> {
+                    car.setPrice(priceClient.getPrice(car.getId()));
+                    car.setLocation(mapsClient.getAddress(car.getLocation()));
+                })
+                .collect(Collectors.toList());
     }
 
     /**
