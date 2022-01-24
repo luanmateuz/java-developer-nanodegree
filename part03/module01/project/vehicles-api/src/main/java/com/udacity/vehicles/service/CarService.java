@@ -53,28 +53,31 @@ public class CarService {
      */
     public Car findById(Long id) {
         /**
-         * TODO: Find the car by ID from the `repository` if it exists.
+         * TODO: Find the car by ID from the `repository` if it exists. [OK]
          *   If it does not exist, throw a CarNotFoundException
          *   Remove the below code as part of your implementation.
          */
-        Car car = new Car();
+        Car car = this.carRepository.findById(id)
+                .orElseThrow(() -> new CarNotFoundException("car id [" + id + "] not found."));
 
         /**
-         * TODO: Use the Pricing Web client you create in `VehiclesApiApplication`
+         * TODO: Use the Pricing Web client you create in `VehiclesApiApplication` [OK]
          *   to get the price based on the `id` input'
-         * TODO: Set the price of the car
+         * TODO: Set the price of the car [OK]
          * Note: The car class file uses @transient, meaning you will need to call
          *   the pricing service each time to get the price.
          */
+        car.setPrice(priceClient.getPrice(car.getId()));
 
         /**
-         * TODO: Use the Maps Web client you create in `VehiclesApiApplication`
+         * TODO: Use the Maps Web client you create in `VehiclesApiApplication` [OK]
          *   to get the address for the vehicle. You should access the location
          *   from the car object and feed it to the Maps service.
-         * TODO: Set the location of the vehicle, including the address information
+         * TODO: Set the location of the vehicle, including the address information [OK]
          * Note: The Location class file also uses @transient for the address,
          * meaning the Maps service needs to be called each time for the address.
          */
+        car.setLocation(mapsClient.getAddress(car.getLocation()));
 
         return car;
     }
