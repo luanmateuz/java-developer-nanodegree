@@ -5,6 +5,7 @@ import com.udacity.vehicles.service.CarService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.hateoas.CollectionModel;
@@ -68,20 +69,20 @@ class CarController {
      * Posts information to create a new vehicle in the system.
      * @param car A new vehicle to add to the system.
      * @return response that the new vehicle was added to the system
-     * @throws URISyntaxException if the request contains invalid fields or syntax
      */
     @PostMapping
-    ResponseEntity<Car> post(@Valid @RequestBody Car car) throws URISyntaxException {
+    ResponseEntity<Car> post(@Valid @RequestBody Car car) {
         /**
-         * TODO: Use the `save` method from the Car Service to save the input car.
-         * TODO: Use the `assembler` on that saved car and return as part of the response.
+         * TODO: Use the `save` method from the Car Service to save the input car. [OK]
+         * TODO: Use the `assembler` on that saved car and return as part of the response. [OK]
          *   Update the first line as part of the above implementing.
          */
-        EntityModel<Car> resource = assembler.toModel(new Car());
+        Car save = this.carService.save(car);
+        EntityModel<Car> resource = assembler.toModel(save);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{id}")
-                .buildAndExpand(car.getId())
+                .buildAndExpand(Objects.requireNonNull(resource.getContent()).getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
