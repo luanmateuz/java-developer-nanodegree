@@ -3,7 +3,6 @@ package com.udacity.vehicles.api;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.service.CarService;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -94,15 +93,16 @@ class CarController {
      * @return response that the vehicle was updated in the system
      */
     @PutMapping("/{id}")
-    ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
+    ResponseEntity<Void> put(@PathVariable Long id, @Valid @RequestBody Car car) {
         /**
-         * TODO: Set the id of the input car object to the `id` input.
-         * TODO: Save the car using the `save` method from the Car service
-         * TODO: Use the `assembler` on that updated car and return as part of the response.
+         * TODO: Set the id of the input car object to the `id` input. [OK]
+         * TODO: Save the car using the `save` method from the Car service [OK]
+         * TODO: Use the `assembler` on that updated car and return as part of the response. [OK]
          *   Update the first line as part of the above implementing.
          */
-        EntityModel<Car> resource = assembler.toModel(new Car());
-        return ResponseEntity.ok(resource);
+        car.setId(id);
+        assembler.toModel(this.carService.save(car));
+        return ResponseEntity.noContent().build();
     }
 
     /**

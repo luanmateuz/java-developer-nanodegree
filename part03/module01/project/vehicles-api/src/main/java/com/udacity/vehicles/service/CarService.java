@@ -95,7 +95,9 @@ public class CarService {
                         carToBeUpdated.setDetails(car.getDetails());
                         carToBeUpdated.setLocation(car.getLocation());
                         return carRepository.save(carToBeUpdated);
-                    }).orElseThrow(CarNotFoundException::new);
+                    })
+                    .orElseThrow(() -> new CarNotFoundException(
+                            "car id [" + car.getId() + "] not found."));
         }
 
         return carRepository.save(car);
