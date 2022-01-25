@@ -6,6 +6,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -80,8 +81,8 @@ public class CarControllerTest {
                         .content(json.write(car).getJson())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andDo(print()
-                ).andExpect(status().isCreated());
+                .andDo(print())
+                .andExpect(status().isCreated());
     }
 
     /**
@@ -122,6 +123,20 @@ public class CarControllerTest {
                 .andExpect(content().string(containsString("Chevrolet")));
     }
 
+    @Test
+    public void updateCar() throws Exception {
+        Car car = getCar();
+        car.setCondition(Condition.NEW);
+
+        mvc.perform(
+                put("/cars/1")
+                    .content(json.write(car).getJson())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
     /**
      * Tests the deletion of a single car by ID.
      *
@@ -134,7 +149,8 @@ public class CarControllerTest {
          *   when the `delete` method is called from the Car Controller. This
          *   should utilize the car from `getCar()` below.
          */
-        mvc.perform(delete("/cars/1"))
+        mvc.perform(
+                delete("/cars/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
