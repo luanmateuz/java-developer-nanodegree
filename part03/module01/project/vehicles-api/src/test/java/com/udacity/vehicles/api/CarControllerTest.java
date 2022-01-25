@@ -19,6 +19,7 @@ import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.Details;
 import com.udacity.vehicles.domain.manufacturer.Manufacturer;
+import com.udacity.vehicles.service.CarNotFoundException;
 import com.udacity.vehicles.service.CarService;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +30,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
@@ -121,6 +124,17 @@ public class CarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(content().string(containsString("Chevrolet")));
+    }
+
+    @Test
+    public void findCarNotFoundException() throws Exception {
+        given(carService.findById(any())).willThrow(CarNotFoundException.class);
+
+        mvc.perform(
+                get("/cars/11"))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andReturn();
     }
 
     @Test
