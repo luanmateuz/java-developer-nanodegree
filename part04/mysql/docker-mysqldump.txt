@@ -1,0 +1,1 @@
+docker exec -i mysql_container mysqldump -uroot -proot --databases database_name --skip-comments > /path/to/my/dump.sql
