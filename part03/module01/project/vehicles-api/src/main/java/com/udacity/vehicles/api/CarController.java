@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-/**
- * Implements a REST-based controller for the Vehicles API.
- */
 @RestController
 @RequestMapping("/cars")
 class CarController {
@@ -55,11 +52,6 @@ class CarController {
      */
     @GetMapping("/{id}")
     EntityModel<Car> get(@PathVariable Long id) {
-        /**
-         * TODO: Use the `findById` method from the Car Service to get car information. [OK]
-         * TODO: Use the `assembler` on that car and return the resulting output. [OK]
-         *   Update the first line as part of the above implementing.
-         */
         Car car = this.carService.findById(id);
         return assembler.toModel(car);
     }
@@ -71,11 +63,6 @@ class CarController {
      */
     @PostMapping
     ResponseEntity<Car> post(@Valid @RequestBody Car car) {
-        /**
-         * TODO: Use the `save` method from the Car Service to save the input car. [OK]
-         * TODO: Use the `assembler` on that saved car and return as part of the response. [OK]
-         *   Update the first line as part of the above implementing.
-         */
         Car save = this.carService.save(car);
         EntityModel<Car> resource = assembler.toModel(save);
         URI uri = ServletUriComponentsBuilder
@@ -94,12 +81,6 @@ class CarController {
      */
     @PutMapping("/{id}")
     ResponseEntity<Void> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-        /**
-         * TODO: Set the id of the input car object to the `id` input. [OK]
-         * TODO: Save the car using the `save` method from the Car service [OK]
-         * TODO: Use the `assembler` on that updated car and return as part of the response. [OK]
-         *   Update the first line as part of the above implementing.
-         */
         car.setId(id);
         assembler.toModel(this.carService.save(car));
         return ResponseEntity.noContent().build();
@@ -112,9 +93,6 @@ class CarController {
      */
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id) {
-        /**
-         * TODO: Use the Car Service to delete the requested vehicle. [OK]
-         */
         this.carService.delete(id);
         return ResponseEntity
                 .noContent()
