@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: jdnd_lesson01
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - jdnd_volume01:/var/lib/mysql
+
+volumes:
+  jdnd_volume01:
