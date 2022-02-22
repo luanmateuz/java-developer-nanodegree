@@ -1,0 +1,18 @@
+[
+    {
+        "_id" : ObjectId("621512f28d35c8745defeba0"),
+        "name" : "Edu",
+        "text" : "asdf asdf asdf",
+        "post_id" : [ 
+            "621512b98d35c8745defeb9d"
+        ]
+    },
+    {
+        "_id" : ObjectId("621512f28d35c8745defeba1"),
+        "name" : "John",
+        "text" : "lol lol lol lol",
+        "post_id" : [ 
+            "621512b98d35c8745defeb9e"
+        ]
+    }
+]

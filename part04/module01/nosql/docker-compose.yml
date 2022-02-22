@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  nosql_mongo:
+    image: mongo
+    container_name: nosql_mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - "27017:27017"
+    volumes:
+        - type: volume
+          source: nosql_mongo_vol
+          target: /data/db
+
+volumes:
+  nosql_mongo_vol:

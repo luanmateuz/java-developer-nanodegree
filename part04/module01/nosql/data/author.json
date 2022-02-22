@@ -1,0 +1,20 @@
+[
+    {
+        "_id" : ObjectId("62150fc08d35c8745defeb97"),
+        "first_name" : "John",
+        "last_name" : "Duke",
+        "email" : "johnduke@email.com"
+    },
+    {
+        "_id" : ObjectId("62150fc08d35c8745defeb98"),
+        "first_name" : "Maria",
+        "last_name" : "Alt",
+        "email" : "mariaalt@email.com"
+    },
+    {
+        "_id" : ObjectId("62150fc08d35c8745defeb99"),
+        "first_name" : "Luke",
+        "last_name" : "Skywalker",
+        "email" : "skywalker@email.com"
+    }
+]
