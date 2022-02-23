@@ -1,0 +1,26 @@
+[
+    {
+        "_id" : ObjectId("621512b98d35c8745defeb9d"),
+        "title" : "Lorem Ipsum",
+        "text" : "lorem ipsum lorem ipsum...",
+        "author" : [ 
+            "62150fc08d35c8745defeb97"
+        ]
+    },
+    {
+        "_id" : ObjectId("621512b98d35c8745defeb9e"),
+        "title" : "Blabla Ipsum",
+        "text" : "blabla bla lorem ipsum...",
+        "author" : [ 
+            "62150fc08d35c8745defeb99"
+        ]
+    },
+    {
+        "_id" : ObjectId("621512b98d35c8745defeb9f"),
+        "title" : "LOL",
+        "text" : "lol lol lol lol lol lol...",
+        "author" : [ 
+            "62150fc08d35c8745defeb98"
+        ]
+    }
+]
