@@ -1,9 +1,11 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.entity.Product;
+import com.udacity.course3.reviews.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
+    @Autowired
+    private ProductRepository productRepository;
 
     /**
      * Creates a product.
@@ -24,8 +28,8 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public void createProduct(@RequestBody Product product) {
+        this.productRepository.save(product);
     }
 
     /**
@@ -35,8 +39,8 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Product> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(this.productRepository.findById(id).get());
     }
 
     /**
@@ -45,7 +49,8 @@ public class ProductsController {
      * @return The list of products.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<?> listProducts() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<List<Product>> listProducts() {
+        List<Product> all = this.productRepository.findAll();
+        return ResponseEntity.ok(all);
     }
 }
