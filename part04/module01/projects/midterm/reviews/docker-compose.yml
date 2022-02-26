@@ -7,9 +7,22 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3006"
+      - "3306:3306"
     volumes:
       - vol_midterm:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db_mysql
+    depends_on:
+      - db_mysql
+    volumes:
+      - phpmyadmin_data:/var/www/html/
+
 volumes:
   vol_midterm:
+  phpmyadmin_data:
