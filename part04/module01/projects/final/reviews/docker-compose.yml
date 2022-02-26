@@ -1,0 +1,29 @@
+version: "3.1"
+
+services:
+  db_mysql:
+    image: mysql
+    container_name: mysql_final
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - vol_mysql_final:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_final
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db_mysql
+    depends_on:
+      - db_mysql
+    volumes:
+      - vol_phpmyadmin_final:/var/www/html/
+
+volumes:
+  vol_mysql_final:
+  vol_phpmyadmin_final:
