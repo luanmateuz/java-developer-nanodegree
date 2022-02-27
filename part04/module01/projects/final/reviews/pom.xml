@@ -15,6 +15,7 @@
 	<description>Midterm Project for Data Stores and Persistence</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,6 +29,16 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
 		</dependency>
 
 		<dependency>
