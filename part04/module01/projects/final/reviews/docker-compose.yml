@@ -24,6 +24,31 @@ services:
     volumes:
       - vol_phpmyadmin_final:/var/www/html/
 
+  db_mongo:
+    image: mongo
+    container_name: mongo_final
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - ME_CONFIG_MONGODB_PORT=27017
+    ports:
+      - "27017:27017"
+    volumes:
+      - vol_mongo_final
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express_final
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_SERVER: db_mongo
+    
 volumes:
   vol_mysql_final:
   vol_phpmyadmin_final:
+  vol_mongo_final:
