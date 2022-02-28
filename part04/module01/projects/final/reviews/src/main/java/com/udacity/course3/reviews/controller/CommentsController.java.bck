@@ -2,7 +2,6 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Review;
-import com.udacity.course3.reviews.repository.CommentRepository;
 import com.udacity.course3.reviews.repository.ReviewRepository;
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +22,6 @@ public class CommentsController {
 
     // TODO: Wire needed JPA repositories here
     @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
     private ReviewRepository reviewRepository;
 
     /**
@@ -38,13 +35,15 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
-    public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") Long reviewId,
+    public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") String reviewId,
             @RequestBody
                     Comment comment) {
         Optional<Review> byId = this.reviewRepository.findById(reviewId);
         if (byId.isPresent()) {
-            comment.setReview(byId.get());
-            Comment save = this.commentRepository.save(comment);
+            Review review = byId.get();
+            review.getCommentList().add(comment);
+            Review save = this.reviewRepository.save(review);
+
             return ResponseEntity.ok(save);
         }
 
@@ -62,11 +61,12 @@ public class CommentsController {
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> listCommentsForReview(
-            @PathVariable("reviewId") Long reviewId) {
+            @PathVariable("reviewId") String reviewId) {
         Optional<Review> byId = this.reviewRepository.findById(reviewId);
         if (byId.isPresent()) {
-            List<Comment> allByReview = this.commentRepository.findAllByReview(byId.get());
-            return ResponseEntity.ok(allByReview);
+            Review review = byId.get();
+
+            return ResponseEntity.ok(review.getCommentList());
         }
 
         return ResponseEntity.notFound().build();
