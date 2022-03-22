@@ -112,3 +112,66 @@ Permissions can then be given (and limited) to users based on their roles. That 
 Basically, authorization is all about determinig what a user is allowed to access.
 
 _Authentication and authorization are different, yet related. You can't grant a right to a user (i.e., authorize that user) without first knowing who that user is (i.e., by authenticating their identity)._
+
+### JWTs
+
+"what is JWT"
+
+- ...is a means of representing claims to be transferred between two parties
+- ...is a JSON-based open standard (RFC 7519) for creating access tokens that assert some number of claims.
+- ...is a aJSON object that is defined in RFC 7519 as a safe way to represent a set of information between two parties
+- ...is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
+
+_**JSON Web Token (JWT) is an acces token mechanism that asserts some sort of authorization claim**_
+
+#### JSON Web Token structure
+
+- Header
+- Payload
+- Signature
+
+Typical structure is as follows:
+
+**{header}.{payload}.{signature}**
+
+- **Header**
+
+  - type of the token
+  - signing algorithm
+
+    For example:
+
+    ```json
+    {
+      "alg": "HS256",
+      "typ": "JWT"
+    }
+    ```
+
+- **Payload**
+
+  - contains the claims
+
+    ```json
+    {
+      "sub": "1234",
+      "name": "Sareeta Panda",
+      "admin": true
+    }
+    ```
+
+- **Signature**
+
+  - the encoded header
+  - the encoded header
+  - a secret the algorithm sprecified the header and sign that
+
+    ```json
+    HMACSHA256(
+      base64UrlEncode(header)+"."+
+      base64UrlEncode(payload),
+      secret
+    )
+    ```
+
+_A **JWT** can be used for Authorization and Authentication_
