@@ -25,5 +25,10 @@ pipeline {
                 sh 'ssh vagrant@172.20.1.20 "bash /home/vagrant/script-build.sh;exit;"2>&1'
             }
         }
+        stage ('Deploy') {
+            steps {
+                sh 'ssh vagrant@172.20.1.20 "bash /home/vagrant/script-deploy.sh;exit;"2>&1'
+            }
+        }
     }
 }
