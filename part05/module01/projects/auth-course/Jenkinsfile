@@ -20,5 +20,12 @@ pipeline {
                 sh 'mvn -f $PROJECT_DIRECTORY test'
             }
         }
+        stage ('Docker Image') {
+            steps {
+                script {
+                    dockerapp = docker.build("luanmateuz/auth-couse:${env.BUILD_ID}", '-f $PROJECT_DIRECTORY')
+                }
+            }
+        }
     }
 }
