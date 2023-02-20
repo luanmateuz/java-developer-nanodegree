@@ -15,5 +15,15 @@ pipeline {
                 sh 'mvn -f $PROJECT_DIRECTORY -B -DskikpTests clean package'
             }
         }
+        stage ('Test') {
+            steps {
+                sh 'mvn -f $PROJECT_DIRECTORY test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
     }
 }
