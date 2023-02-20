@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PROJECT_DIRECTORY = "part05/module01/projects/auth-course/"
+    }
 
     stages {
         stage ('Start') {
@@ -9,7 +12,7 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                sh 'mvn -B -DskikpTests clean package'
+                sh 'mvn -f $PROJECT_DIRECTORY -B -DskikpTests clean package'
             }
         }
     }
