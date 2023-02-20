@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.demo.model.persistence.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +21,9 @@ import java.util.Collections;
 import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private static final Logger logger = LogManager.getLogger(JWTAuthenticationFilter.class);
+
     private final AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -34,6 +39,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     credentials.getPassword(),
                     Collections.emptyList()));
         } catch (IOException ex) {
+            logger.error("Error while authenticating user. ", ex);
             throw new RuntimeException(ex);
         }
     }
